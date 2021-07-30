@@ -1,6 +1,4 @@
-﻿
-
-namespace Framework.Console
+﻿namespace Framework.Console
 {
     using Application.Domain;
     using Application.Services.Interfaces;
@@ -8,9 +6,9 @@ namespace Framework.Console
     using Framework.Console.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection;
     using System;
+
     public class Program
     {
-
         static void Main(string[] args)
         {
             ServiceProvider sp = Container.Build();
@@ -25,7 +23,6 @@ namespace Framework.Console
             Console.ReadLine();
 
 
-            //            var _outputBuilder = outputBuilder.CreateOutputBuilder(inputUserCommands).Build().Get(); ;
 
             var _inputUserBuilder = inputUserBuilder.CreateInputUserBuilder(args).Build();
 
@@ -46,7 +43,7 @@ namespace Framework.Console
 
             var processed = outputService.ProcessOutput(inputUserCommands);
 
-
+            Console.Out.WriteLine(" ");
             Console.Out.WriteLine(">>>>>>> RESULT <<<<<<<<");
             Console.Out.WriteLine(processed);
 
@@ -54,6 +51,5 @@ namespace Framework.Console
 
         }
     }
-
 
 }

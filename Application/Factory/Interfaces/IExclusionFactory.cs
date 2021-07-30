@@ -1,5 +1,5 @@
 ﻿
-namespace Application.Factory
+namespace Application.Factory.Interfaces
 {
     using Application.Domain.Enums;
     using Application.Domain.Exclusions;
@@ -9,5 +9,6 @@ namespace Application.Factory
     public interface IExclusionFactory
     {
         ExclusionBase CreateExclusion(ExclusionType type, IList<string> exclusions);
+        Exclusion CreateExclusion(string outputType, List<string> args);
     }
 }

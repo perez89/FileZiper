@@ -4,11 +4,12 @@ namespace Application.Factory
 {
     using Application.Domain.Enums;
     using Application.Domain.Outputs;
+    using Application.Factory.Interfaces;
     using System;
 
     public class OutputFactory : IOutputFactory
     {
-        public IOutput GetOutputFromArgument(OutputType outputType, string destination, string fileName)
+        public IOutput CreateOutputFromArguments(OutputType outputType, string destination, string fileName)
         {
             switch (outputType)
             {
@@ -20,7 +21,6 @@ namespace Application.Factory
                     return new FileShareOutput(destination, fileName);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(outputType), outputType, null);
-
             }
 
         }
@@ -39,6 +39,15 @@ namespace Application.Factory
                 default: throw new ArgumentOutOfRangeException(nameof(outputType), outputType, null);
 
             }
+        }
+
+        public OutputDestinationDTO CreateOutputDestination(string type, string destination)
+        {
+            return new OutputDestinationDTO
+            {
+                Type = (OutputType)Enum.Parse(typeof(OutputType), type),
+                Destination = destination
+            };
         }
     }
 }

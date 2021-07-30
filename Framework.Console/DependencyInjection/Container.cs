@@ -18,9 +18,7 @@ namespace Framework.Console.DependencyInjection
         private static IServiceCollection SetupFrameworkConsole(this IServiceCollection services)
         {
             return services;
-                //.AddSingleton<IUserAccessOperationTypeToEncryptionTypeDtoAdapter, UserAccessOperationTypeToEncryptionTypeDtoAdapter>()
-                //.AddSingleton<IUserConsoleInputViewModelToNewFileDtoAdapter, UserConsoleInputViewModelToNewFileDtoAdapter>()
-                //.AddSingleton<IUserOperationTypeToFileReaderTypeDtoAdapter, UserOperationTypeToFileReaderTypeDtoAdapter>();
+             
         }
     }
 }

@@ -18,9 +18,7 @@ namespace Core.Console.DependencyInjection
         private static IServiceCollection SetupCoreConsole(this IServiceCollection services)
         {
             return services;
-                //.AddSingleton<IUserAccessOperationTypeToEncryptionTypeDtoAdapter, UserAccessOperationTypeToEncryptionTypeDtoAdapter>()
-                //.AddSingleton<IUserConsoleInputViewModelToNewFileDtoAdapter, UserConsoleInputViewModelToNewFileDtoAdapter>()
-                //.AddSingleton<IUserOperationTypeToFileReaderTypeDtoAdapter, UserOperationTypeToFileReaderTypeDtoAdapter>();
+           
         }
     }
 }

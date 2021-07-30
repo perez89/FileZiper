@@ -5,6 +5,7 @@ namespace Application.Factory
     using Application.Domain.Enums;
     using Application.Domain.Exclusions;
     using Application.Domain.Exclusions.Interfaces;
+    using Application.Factory.Interfaces;
     using System;
     using System.Collections.Generic;
     public  class ExclusionFactory : IExclusionFactory
@@ -23,6 +24,15 @@ namespace Application.Factory
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
 
+        }
+
+        public Exclusion CreateExclusion(string outputType, List<string> args)
+        {
+            return new Exclusion
+            {
+                ExclusionType = (ExclusionType)Enum.Parse(typeof(ExclusionType), outputType),
+                Exclusions = args
+            };
         }
     }
 

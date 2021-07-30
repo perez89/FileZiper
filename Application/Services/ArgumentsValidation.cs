@@ -4,7 +4,7 @@ namespace Application.Services
 {
     using Application.Domain.DTOs;
     using Application.Domain.Enums;
-    using Application.Factory;
+    using Application.Factory.Interfaces;
     using Application.Services.Interfaces;
     using Application.Utitlities;
     using System.Linq;
@@ -74,7 +74,7 @@ namespace Application.Services
 
         private bool ValidateOutputDestination(string output, string destination)
         {
-            return _outputFactory.GetOutputTypeToTestDestination(output, destination).ValidateDestination(destination);
+            return _outputFactory.GetOutputTypeToTestDestination(output, destination).IsDestinationValid();
         }
 
     }

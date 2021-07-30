@@ -5,7 +5,7 @@ namespace Application.Domain
     using Application.Domain.Enums;
     using Application.Domain.Exclusions;
     using Application.Domain.Outputs;
-    using Application.Factory;
+    using Application.Factory.Interfaces;
     using System.Collections.Generic;
 
     public class OutputBuilder : IOutputBuilder
@@ -17,6 +17,7 @@ namespace Application.Domain
 
         public string Source { get; set; }
         public string Name { private get; set; }
+
         public string fileName;
         public IList<Exclusion> Exclusions { get; set; }
         public OutputType Output_Type { get; set; }
@@ -58,7 +59,7 @@ namespace Application.Domain
 
         private void CreateOutput()
         {
-            this._output = this.OutputFactory.GetOutputFromArgument(Output_Type, Destination, fileName);
+            this._output = this.OutputFactory.CreateOutputFromArguments(Output_Type, Destination, fileName);
         }
 
         private void CreateZip()
