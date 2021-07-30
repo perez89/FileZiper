@@ -16,8 +16,8 @@ namespace Application.Factory
                     return new LocalOutput(destination,  fileName);
                 case OutputType.SMTP:
                     return new SmtpOutput(destination,  fileName);
-                case OutputType.Remote:
-                    return new RemoteOutput(destination, fileName);
+                case OutputType.FileShare:
+                    return new FileShareOutput(destination, fileName);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(outputType), outputType, null);
 
@@ -34,7 +34,7 @@ namespace Application.Factory
 
                 case OutputType.SMTP: return new SmtpOutput(destination);
 
-                case OutputType.Remote: return new RemoteOutput(destination);
+                case OutputType.FileShare: return new FileShareOutput(destination);
 
                 default: throw new ArgumentOutOfRangeException(nameof(outputType), outputType, null);
 

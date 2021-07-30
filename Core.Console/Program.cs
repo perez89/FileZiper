@@ -17,7 +17,9 @@
             var exclusionService = sp.GetService<IExclusionService>();
             var outputService = sp.GetService<IOutputService>();
 
-            Console.WriteLine("Hello World! - .Net core");
+            Console.WriteLine("Hello to FileZiper! - .Net Core");
+
+            Console.WriteLine("Write something to start the process :)");
             Console.ReadLine();
 
 
@@ -42,7 +44,7 @@
 
             var processed = outputService.ProcessOutput(inputUserCommands);
 
-
+            Console.Out.WriteLine(" ");
             Console.Out.WriteLine(">>>>>>> RESULT <<<<<<<<");
             Console.Out.WriteLine(processed);
 

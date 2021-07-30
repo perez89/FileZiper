@@ -27,8 +27,7 @@
                 .AddSingleton<IEvent, ExtensionExclusion>()
                 .AddSingleton<IEvent, FolderExclusion>()
                 .AddSingleton<IOutputBuilder, OutputBuilder>()
-
-                     .AddSingleton<IExclusionHandler, ExclusionHandler>()
+                .AddSingleton<IExclusionController, ExclusionController>()
 
                 //Strategies
 
@@ -48,6 +47,7 @@
                 .AddSingleton<IInputUserBuilder, InputUserBuilder>()
                 .AddSingleton<IExclusionService, ExclusionService>()
                 .AddSingleton<IOutputService, OutputService>()
+                .AddSingleton<IReadFilesService, ReadFilesService>()
                 .AddSingleton<IOutputFactory, OutputFactory>();
 
 

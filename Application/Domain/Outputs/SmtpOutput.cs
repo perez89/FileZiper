@@ -1,17 +1,18 @@
 ﻿namespace Application.Domain.Outputs
 {
-    using System.Text.RegularExpressions;
+    using System.IO;
 
-    public class RemoteOutput : IOutput
+    public class SmtpOutput : IOutput
     {
         public string Destination { get; set; }
         public string FileName { get; set; }
-        public RemoteOutput(string destination)
+
+        public SmtpOutput(string destination)
         {
             Destination = destination;
         }
 
-        public RemoteOutput(string destination, string fileName)
+        public SmtpOutput(string destination, string fileName)
         {
             Destination = destination;
             FileName = fileName;
@@ -40,14 +41,15 @@
 
             //Console.WriteLine("Email Criado");
 
-            return "Zipped and sent Remote";
+            return "Zipped and sent by Email";
 
         }
 
-
         public bool ValidateDestination(string destination)
         {
-            return Regex.IsMatch(destination, @"/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/");
+
+            return Directory.Exists(destination);
+
         }
     }
 }

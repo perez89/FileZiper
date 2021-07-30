@@ -11,6 +11,7 @@ namespace UnitTests
     using Application.Services.Interfaces;
     using Moq;
     using System.Collections.Generic;
+    using System.Linq;
     using Xunit;
     public class UnitExlusions
     {
@@ -48,44 +49,58 @@ namespace UnitTests
         [Fact]
         public void TestExclusionService()
         {
+            string[] laodLines = { "luis.jpeg", "lemos.txt", "perez.png" };
+
+            string[] laodLinesFiltered = { "luis.jpeg" };
+
+            string pathSource = @"C:\Users\Perez\Pictures\WC";
             List<string> exclusionsValues = new List<string> { "png", "txt"};
-            ExclusionType exclusion = ExclusionType.EExtension;
-            var extensionExclusion = new ExtensionExclusion(exclusionsValues);
+            ExclusionType exclusionType = ExclusionType.EExtension;
+
+            var exclusion = new Exclusion {
+                ExclusionType = exclusionType,
+                Exclusions = exclusionsValues
+            };
+
+
+            var extensionExclusions = new ExtensionExclusion(exclusionsValues);
 
             var inputUserCommands = new UserInputDTO {
-
+                Source = pathSource,
+                Exclusions = new List<Exclusion>() { exclusion }
             };
 
             //Arrange
-
             var exclusionFactoryMock = new Mock<IExclusionFactory>();
+            var ExclusionControllerMock = new Mock<IExclusionController>();
+            var readFilesService = new Mock<IReadFilesService>();
+
             var inputUserCommandsMock = new Mock<UserInputDTO>();
 
-            //ExclusionType type, IList<string> exclusions
-            //exclusionFactoryMock.Setup(item => item.CreateExclusion(It.IsAny<ExclusionType>(), It.IsAny<List<string>>())).Returns(extensionExclusion);
+            exclusionFactoryMock.Setup(item => item.CreateExclusion(exclusionType, exclusionsValues)).Returns(extensionExclusions);
 
-            exclusionFactoryMock.Setup(item => item.CreateExclusion(exclusion, exclusionsValues)).Returns(extensionExclusion);
+            readFilesService.Setup(item => item.GetFiles(pathSource)).Returns(laodLines);
+
+
+            laodLines.Where(filePath => !extensionExclusions.Exclude(filePath)).ToList();
+
+
+            ExclusionControllerMock.Setup(item => item.Process(It.IsAny<List<ExclusionBase>>(), laodLines)).Returns(laodLinesFiltered);
+
 
             //Act 
-            var exclusionService = new ExclusionService(exclusionHandler.Object, exclusionFactory.Object);
-
-            exclusionService.RemoveExclusionsFromInput(inputUserCommands.Object);
+            var exclusionService = new ExclusionService(ExclusionControllerMock.Object, exclusionFactoryMock.Object, readFilesService.Object);
 
 
-            exclusionService.RemoveExclusionsFromInput(ISetup.)
-
-
+            exclusionService.RemoveExclusionsFromInput(inputUserCommands);
             //Assert
 
 
-            Assert.NotNull(inputUserCommands.Object.folderAndSubFilesToZip);
+            Assert.NotNull(inputUserCommands.folderAndSubFilesToZip);
 
-            Assert.True(inputUserCommands.Object.folderAndSubFilesToZip.Length>0);
+            Assert.True(inputUserCommands.folderAndSubFilesToZip.Length>0);
 
-            //Assert.False(exclusionCreated.Exclude(filePath));
-
-            //Assert.True(exclusionCreated.Exclude(filePathTxt));
-            //Assert.True(exclusionCreated.Exclude(filePathTPdf));
+  
 
         }
     }
