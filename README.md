@@ -1,29 +1,29 @@
 # FileZiper
 
-Console application that can create a zip from a main folder (all folders and files inside that folder), excluding certain extensions, folder and file names.  
+Console application that can create a zip file from a main folder (all folders and files inside that folder), excluding certain extensions, folders and file names.  
 
-The program also allow the user to specific the destination of the zip, it can be store local, sent by email or in a fileshare.   
+The program also allows the user to specify the destination of the zip: it can be stored locally, sent by email or in a fileshare.   
   
-Como utilizador posso invocar a aplicação via linha de comandos passando como argumentos:  
-- a pasta a zipar (e.g. C:\\temp)
-- o nome final do ficheiro zip (e.g. final.zip)
-- uma lista de extensões a excluir (e.g. .bmp, .jpg, .txt)
-- uma lista de diretórios a excluir (e.g. git, diretório)
-- uma lista de ficheiros a excluir (e.g. ficheiro1, filcheiro2)
-- tipo de output (e.g. localFile, filesShare, SMTP)
-- parâmetros opcionais de acordo com o tipo de output (e.g. path do fileshare)
+The user can invoke the application console with the following arguments:  
+- the folder to zip (e.g. C:\\temp);  
+- the final name of the zip file (e.g. final.zip);    
+- a list of extensions to exclude  (e.g. .bmp, .jpg, .txt)
 
-All files and sub files must be include in the output zip.  
+- a list of folders to exclude (e.g. git, diretório)
+- a list of files to exclude (e.g. ficheiro1, filcheiro2)
+- output type (e.g. localFile, filesShare, SMTP)
+- alternative paramenters according to the output *see below
+
+All files and sub files must be included in the output zip.  
 
 Example:  
--source C:\Users\Perez\Pictures\WC -EExtension png txt -EFolder Sporting -EFile wc_face -output localfile -destination c:\xpto
-
+-source C:\Users\Perez\Pictures\WC -EExtension png txt -EFolder Sporting -EFile wc_face -output localfile -destination c:\xpto  
 
 Source  
   -source {path to the root folder}
 
 Exclude(optional)
-  extensions use: -EExtensions "extensions name"  
+  extensions use: -EExtension "extensions name"  
   folders use: -EFolder "folders name"  
   files use: -EFile "files name"  
   
