@@ -7,8 +7,8 @@ namespace Application.Domain.Outputs
         string Destination { get; set; }
         string FileName { get; set; }
         string Execute(byte[] ZippedStream);
-        bool ValidateDestination(string destination);
-
+        bool IsDestinationValid(string destination);
+        bool IsDestinationValid();
 
     }
 }

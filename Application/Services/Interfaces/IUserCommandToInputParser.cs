@@ -2,7 +2,7 @@
 {
     using Application.Domain.DTOs;
 
-    public interface IParser
+    public interface IUserCommandToInputParser
     { 
         UserInputDTO Parse(UserCommandsDTO args);
     }

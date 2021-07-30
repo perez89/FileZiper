@@ -1,12 +1,14 @@
 ﻿namespace Application.Domain.Outputs
 {
     using System.IO;
+    using System.Text.RegularExpressions;
 
     public class SmtpOutput : IOutput
     {
         public string Destination { get; set; }
         public string FileName { get; set; }
 
+     
         public SmtpOutput(string destination)
         {
             Destination = destination;
@@ -45,10 +47,15 @@
 
         }
 
-        public bool ValidateDestination(string destination)
+        public bool IsDestinationValid(string destination)
         {
+            return destination.Contains("@");
 
-            return Directory.Exists(destination);
+        }
+
+        public bool IsDestinationValid()
+        {
+            return Destination.Contains("@");
 
         }
     }

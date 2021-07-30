@@ -4,19 +4,22 @@
     using Application.Domain.Enums;
     using Application.Domain.Exclusions;
     using Application.Domain.Outputs;
+    using Application.Factory.Interfaces;
     using Application.Services.Interfaces;
     using Application.Utitlities;
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Parser : IParser
+    public class UserCommandToInputParser : IUserCommandToInputParser
     {
         UserCommandsDTO _argsDictionary;
-        private IFactory _factory { get; set; }
-        public Parser(IFactory factory)
+        private IExclusionFactory _exclusionFactory { get; set; }    
+        private IOutputFactory _outputFactory { get; set; }
+        public UserCommandToInputParser(IExclusionFactory exclusionFactory, IOutputFactory outputFactory)
         {
-            _factory = factory;
+            _exclusionFactory = exclusionFactory;
+            _outputFactory = outputFactory;
         }
 
         public UserInputDTO Parse(UserCommandsDTO args)
@@ -59,7 +62,7 @@
             return result;
         }
 
-        private IList<Exclusion> GetExclusionType(IEnumerable<UserCommand> exclusions)
+        public IList<Exclusion> GetExclusionType(IEnumerable<UserCommand> exclusions)
         {
             var availableExclusions = ApplicationArguments.AvailableExtensions();
 
@@ -72,7 +75,7 @@
                 if (_exclusions.Any())
                 {
                     var patternToRemove = _exclusions.Select(x => x.Argument).ToList();
-                    result.Add(_factory.CreateExtension(availableExclusion.Value, patternToRemove));
+                    result.Add(_exclusionFactory.CreateExclusion(availableExclusion.Value, patternToRemove));
                 }
             }
 
@@ -92,32 +95,8 @@
         {
             var availableOutput = ApplicationArguments.AvailableOutputOperations().FirstOrDefault(x=> string.Equals(x.Value, outputType.Argument, StringComparison.OrdinalIgnoreCase) ).Value;
 
-            return _factory.CreateOutputDestination(availableOutput, destination.Argument);            
+            return _outputFactory.CreateOutputDestination(availableOutput, destination.Argument);        
         }
 
-        public class Factory : IFactory{
-            public Exclusion CreateExtension(string outputType, List<string> args) {
-                return new Exclusion
-                {
-                    ExclusionType = (ExclusionType)Enum.Parse(typeof(ExclusionType), outputType),
-                    Exclusions = args
-                };
-            }
-
-            public OutputDestinationDTO CreateOutputDestination(string type, string destination)
-            {
-                return new OutputDestinationDTO
-                {
-                    Type = (OutputType)Enum.Parse(typeof(OutputType), type),
-                    Destination = destination
-                };
-            }
-        }
-
-        public interface IFactory {
-            Exclusion CreateExtension(string outputType, List<string> args);
-            OutputDestinationDTO CreateOutputDestination(string type, string destination);
-        }
-   
     }
 }

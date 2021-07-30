@@ -3,7 +3,7 @@
 
 namespace Application.Domain.Outputs
 {
-    using System.Text.RegularExpressions;
+    using System.IO;
 
     public class FileShareOutput : IOutput
     {
@@ -48,9 +48,13 @@ namespace Application.Domain.Outputs
         }
 
 
-        public bool ValidateDestination(string destination)
+        public bool IsDestinationValid(string destination)
         {
-            return Regex.IsMatch(destination, @"/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/");
+            return Directory.Exists(destination);
+        }
+        public bool IsDestinationValid()
+        {
+            return Directory.Exists(this.Destination);
         }
     }
 }

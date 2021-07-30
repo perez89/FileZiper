@@ -7,6 +7,7 @@ namespace UnitTests
     using Application.Domain.Exclusions;
     using Application.Domain.Exclusions.Interfaces;
     using Application.Factory;
+    using Application.Factory.Interfaces;
     using Application.Services;
     using Application.Services.Interfaces;
     using Moq;
@@ -15,36 +16,6 @@ namespace UnitTests
     using Xunit;
     public class UnitExlusions
     {
-        [Fact]
-        public void TestExclusionFactory()
-        {
-            //Arrange
-            //Mock<IExclusionFactory> mock = 
-            var exclusionFactory = new ExclusionFactory();
-            ExclusionType type = ExclusionType.EExtension;
-
-            List<string> exclusions = new List<string>(new string[] { "png", "txt", "pdf" });
-
-            var filePath = "C:\fsdsd";
-
-            var filePathTxt = "C:\fsdsd.txt";
-
-            var filePathTPdf = "C:\fsdsd.pdf";
-
-            //Act 
-            var exclusionCreated = exclusionFactory.CreateExclusion(type, exclusions);
-
-
-            //Assert
-            Assert.True(exclusionCreated.GetType() ==  typeof(ExtensionExclusion));
-
-            Assert.False(exclusionCreated.Exclude(filePath));
-
-            Assert.True(exclusionCreated.Exclude(filePathTxt)); 
-            Assert.True(exclusionCreated.Exclude(filePathTPdf));
-
-        }
-       
 
         [Fact]
         public void TestExclusionService()

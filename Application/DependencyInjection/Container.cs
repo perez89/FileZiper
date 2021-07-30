@@ -5,12 +5,13 @@
     using Application.Domain.Exclusions.Interfaces;
     using Application.Domain.Outputs;
     using Application.Factory;
+    using Application.Factory.Interfaces;
     using Application.Services;
     using Application.Services.Interfaces;
     using Microsoft.Extensions.DependencyInjection;
     using System.Linq;
     using System.Reflection;
-    using static Application.Services.Parser;
+    using static Application.Services.UserCommandToInputParser;
 
     public static class Container
     {
@@ -38,16 +39,17 @@
 
                 //df
                 .AddSingleton<IUserArgumentsHandler, UserArgumentsHandler>()
-                .AddSingleton<IParser, Parser>()
+                .AddSingleton<IUserCommandToInputParser, UserCommandToInputParser>()
                 .AddSingleton<IArgumentsValidation, ArgumentsValidation>()
 
-                .AddSingleton<IFactory, Factory>()
+
                 .AddSingleton<IZipper, Zipper>()
-                .AddSingleton<IExclusionFactory, ExclusionFactory>()
+
                 .AddSingleton<IInputUserBuilder, InputUserBuilder>()
                 .AddSingleton<IExclusionService, ExclusionService>()
                 .AddSingleton<IOutputService, OutputService>()
                 .AddSingleton<IReadFilesService, ReadFilesService>()
+                .AddSingleton<IExclusionFactory, ExclusionFactory>()
                 .AddSingleton<IOutputFactory, OutputFactory>();
 
 

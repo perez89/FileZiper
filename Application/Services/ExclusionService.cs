@@ -2,7 +2,7 @@
 namespace Application.Services
 {
     using Application.Domain.DTOs;
-    using Application.Factory;
+    using Application.Factory.Interfaces;
     using Application.Services.Interfaces;
     using System;
     using System.Linq;

@@ -52,9 +52,13 @@ namespace Application.Domain.Outputs
             return "Zipped and saved on a Folder";
         }
 
-        public bool ValidateDestination(string destination)
+        public bool IsDestinationValid(string destination)
         {
             return Directory.Exists(destination);
+        }
+        public bool IsDestinationValid()
+        {
+            return Directory.Exists(this.Destination);
         }
     }
 }

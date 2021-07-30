@@ -13,10 +13,10 @@ namespace Application.Domain
         private UserInputDTO userInputDTO;
         private readonly IUserArgumentsHandler _userCommands;
         private readonly IArgumentsValidation _validateArgs;
-        private readonly IParser _parser;
+        private readonly IUserCommandToInputParser _parser;
 
 
-        public InputUserBuilder(IUserArgumentsHandler userCommands, IArgumentsValidation validateArgs, IParser parser)
+        public InputUserBuilder(IUserArgumentsHandler userCommands, IArgumentsValidation validateArgs, IUserCommandToInputParser parser)
         {
             this._userCommands = userCommands;
             this._validateArgs = validateArgs;
