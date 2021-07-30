@@ -29,13 +29,13 @@ To define the output use
   -output {Output option} -destination {destination must match the output type}
   
 Output options:
-  localfile
-  smtp
-  fileshare
-  
-  
-  Destination rules:
-  For localfile the destination must match a existing folder path
-  For smtp the destination must match a email
-  For fileshare the destination must match a existing folder path
+  localfile    
+  smtp  
+  fileshare  
+    
+    
+  Destination rules:  
+  For localfile the destination must match a existing folder path  
+  For smtp the destination must match a email  
+  For fileshare the destination must match a existing folder path  
   
