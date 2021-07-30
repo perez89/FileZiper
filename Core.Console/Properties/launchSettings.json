@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Core.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "-source C:\\Users\\Perez\\Pictures\\WC -EExtension png txt -EFolder Sporting -EFile wc_face -output localfile -destination c:\\xpto"
+    }
+  }
+}

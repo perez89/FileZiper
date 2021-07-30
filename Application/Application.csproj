@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CommandLine\**" />
+    <Compile Remove="Outputs\**" />
+    <EmbeddedResource Remove="CommandLine\**" />
+    <EmbeddedResource Remove="Outputs\**" />
+    <None Remove="CommandLine\**" />
+    <None Remove="Outputs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\Zip\IZipperGod.cs" />
+    <Compile Remove="Domain\Zip\ZipFile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Roslynator.Analyzers" Version="3.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>
