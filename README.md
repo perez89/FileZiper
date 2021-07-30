@@ -1,13 +1,10 @@
 # FileZiper
 
-Aplicação de linha de comandos que consegue criar um zip de uma pasta e
-respetivas sub-pastas, excluindo determinadas extensões, pastas ou nomes de ficheiros.  
+Console application that can create a zip from a main folder (all folders and files inside that folder), excluding certain extensions, folder and file names.  
 
-O programa também permite que o ficheiro output possa ser gerado para uma pasta local, copiado
-para uma fileshare ou enviado como anexo por Email (SMTP).  
+The program also allow the user to specific the destination of the zip, it can be store local, sent by email or in a fileshare.   
   
-  
-Como utilizador posso invocar a aplicação via linha de comandos passando como argumentos:
+Como utilizador posso invocar a aplicação via linha de comandos passando como argumentos:  
 - a pasta a zipar (e.g. C:\\temp)
 - o nome final do ficheiro zip (e.g. final.zip)
 - uma lista de extensões a excluir (e.g. .bmp, .jpg, .txt)
@@ -16,9 +13,11 @@ Como utilizador posso invocar a aplicação via linha de comandos passando como 
 - tipo de output (e.g. localFile, filesShare, SMTP)
 - parâmetros opcionais de acordo com o tipo de output (e.g. path do fileshare)
 
-Todos os ficheiros e pastas devem ser incluídos no ficheiro de output num ficheiro ZIP.
+All files and sub files must be include in the output zip.  
 
+Example:  
 -source C:\Users\Perez\Pictures\WC -EExtension png txt -EFolder Sporting -EFile wc_face -output localfile -destination c:\xpto
+
 
 Source  
   -source {path to the root folder}
