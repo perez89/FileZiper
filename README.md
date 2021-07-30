@@ -20,7 +20,10 @@ Todos os ficheiros e pastas devem ser incluídos no ficheiro de output num fiche
 
 -source C:\Users\Perez\Pictures\WC -EExtension png txt -EFolder Sporting -EFile wc_face -output localfile -destination c:\xpto
 
-Exclude   
+Source  
+  -source {path to the root folder}
+
+Exclude(optional)
   extensions use: -EExtensions "extensions name"  
   folders use: -EFolder "folders name"  
   files use: -EFile "files name"  
