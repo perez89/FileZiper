@@ -1,20 +1,20 @@
-﻿namespace Application.Domain.Outputs
-{
-    using System;
-    using System.IO;
-    using System.Net.Mail;
+﻿
 
-    public class SmtpOutput : IOutput
+
+namespace Application.Domain.Outputs
+{
+    using System.Text.RegularExpressions;
+
+    public class FileShareOutput : IOutput
     {
         public string Destination { get; set; }
         public string FileName { get; set; }
-
-        public SmtpOutput(string destination)
+        public FileShareOutput(string destination)
         {
             Destination = destination;
         }
 
-        public SmtpOutput(string destination, string fileName)
+        public FileShareOutput(string destination, string fileName)
         {
             Destination = destination;
             FileName = fileName;
@@ -43,15 +43,14 @@
 
             //Console.WriteLine("Email Criado");
 
-            return "Zipped and sent by Email";
+            return "Zipped and sent to a fileshare";
 
         }
-        
-       public bool ValidateDestination(string destination)
+
+
+        public bool ValidateDestination(string destination)
         {
-           
-                return Directory.Exists(destination);
-            
+            return Regex.IsMatch(destination, @"/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/");
         }
     }
 }

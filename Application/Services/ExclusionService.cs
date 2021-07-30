@@ -4,30 +4,62 @@ namespace Application.Services
     using Application.Domain.DTOs;
     using Application.Factory;
     using Application.Services.Interfaces;
-    using System.IO;
+    using System;
     using System.Linq;
-
 
     public class ExclusionService : IExclusionService
     {
-        IExclusionHandler _exclusionHandler; 
-        IExclusionFactory _exclusionFactory;
-        public ExclusionService(IExclusionHandler exclusionHandler, IExclusionFactory exclusionFactory)
+        IExclusionController _ExclusionController; 
+        IExclusionFactory _exclusionFactory; 
+        IReadFilesService _readFilesService;
+        public ExclusionService(IExclusionController ExclusionController, IExclusionFactory exclusionFactory, IReadFilesService readFilesService)
         {
-            _exclusionHandler = exclusionHandler;
+            _ExclusionController = ExclusionController;
             _exclusionFactory = exclusionFactory;
+            _readFilesService = readFilesService;
         }
         public void RemoveExclusionsFromInput(UserInputDTO inputUserCommands)
         {
             var exclusions = inputUserCommands.Exclusions.ToList().ConvertAll(x => _exclusionFactory.CreateExclusion(x.ExclusionType, x.Exclusions));
 
 
-            var folderAndSubFiles = Directory.GetFiles(inputUserCommands.Source, "*", SearchOption.AllDirectories);
+            var folderAndSubFiles = _readFilesService.GetFiles(inputUserCommands.Source);
+
+            Console.WriteLine(" ");
+            Console.WriteLine("Loaded paths");
+
+            foreach (var path in folderAndSubFiles)
+            {
+
+                Console.WriteLine(path);
+
+            }
+
+            Console.WriteLine(" ");
+
+            Console.WriteLine("Exclusions to apply:");
+            foreach (var exclusion in inputUserCommands.Exclusions)
+            {
+
+                Console.WriteLine("Type= " + exclusion.ExclusionType + " | Values: " + String.Join(", ", exclusion.Exclusions));
+
+            }
 
 
-            var folderAndSubFilesFiltered = _exclusionHandler.Process(exclusions, folderAndSubFiles);
+
+            var folderAndSubFilesFiltered = _ExclusionController.Process(exclusions, folderAndSubFiles);
 
             var folderAndSubFilesToZip = folderAndSubFilesFiltered.Select(x => x).ToArray();
+
+            Console.WriteLine(" ");
+
+            Console.WriteLine("Paths to Zip : ");
+            foreach (var path in folderAndSubFilesToZip)
+            {
+
+                Console.WriteLine(path);
+
+            }
 
             inputUserCommands.folderAndSubFilesToZip = folderAndSubFilesToZip;
         }

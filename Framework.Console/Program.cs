@@ -19,7 +19,9 @@ namespace Framework.Console
             var exclusionService = sp.GetService<IExclusionService>();
             var outputService = sp.GetService<IOutputService>();
 
-            Console.WriteLine("Hello World! - .FileZiper");
+            Console.WriteLine("Hello to FileZiper! - .Net Framework");
+
+            Console.WriteLine("Write something to start the process :)");
             Console.ReadLine();
 
 

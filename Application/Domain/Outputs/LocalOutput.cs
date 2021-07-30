@@ -1,7 +1,6 @@
 ﻿
 namespace Application.Domain.Outputs
 {
-    using System;
     using System.IO;
 
     public class LocalOutput : IOutput
@@ -25,7 +24,6 @@ namespace Application.Domain.Outputs
         public string Execute(byte[] ZippedStream)
         {
 
-            //  const string fileName = "Test#@@#.dat";
 
             var finalPath = string.Format("{0}\\{1}.zip", Destination, FileName);
             using (FileStream
@@ -45,18 +43,13 @@ namespace Application.Domain.Outputs
                 {
                     if (ZippedStream[i] != fileStream.ReadByte())
                     {
-                        Console.WriteLine("Error writing data.");
                         return "";
                     }
                 }
-                Console.WriteLine("The data was written to {0} " +
-                    "and verified.", fileStream.Name);
+          
             }
    
-
-            Console.WriteLine("Ficheiro Criado");
-
-            return "Zipped and saved on a File";
+            return "Zipped and saved on a Folder";
         }
 
         public bool ValidateDestination(string destination)

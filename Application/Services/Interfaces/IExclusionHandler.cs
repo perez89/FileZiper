@@ -4,7 +4,7 @@ namespace Application.Services.Interfaces
     using Application.Domain;
     using System.Collections.Generic;
 
-    public interface IExclusionHandler
+    public interface IExclusionController
     {
          IList<string> Process(IEvent @exclusion, IList<string> filePaths);
 

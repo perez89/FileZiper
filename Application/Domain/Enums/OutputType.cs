@@ -4,7 +4,7 @@
     {
         LocalFile = 1,
 
-        Remote = 2,
+        FileShare = 2,
 
         SMTP = 3
     } 

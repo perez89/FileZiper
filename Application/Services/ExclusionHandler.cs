@@ -5,26 +5,26 @@
     using Application.Services.Interfaces;
     using System.Collections.Generic;
     using System.Linq;
-    public class ExclusionHandler : IExclusionHandler
+    public class ExclusionController : IExclusionController
     {
         private readonly IEnumerable<IEventExclusionStrategy> _outputStrategies;
 
-        public ExclusionHandler(IEnumerable<IEventExclusionStrategy> outputStrategies)
+        public ExclusionController(IEnumerable<IEventExclusionStrategy> outputStrategies)
         {
             this._outputStrategies = outputStrategies;
         }
 
-        public IList<string> Process(IEvent  exclusion, IList<string> filePaths)
+        public IList<string> Process(IEvent  exclusion, IList<string> loadedLines)
         {
             foreach (var messageStrategy in this._outputStrategies)
             {
                 if (messageStrategy.CanHandle(exclusion))
                 {
-                    filePaths = filePaths.Where(filePath => !messageStrategy.Exclude(exclusion, filePath)).ToList();
+                    loadedLines = loadedLines.Where(filePath => !messageStrategy.Exclude(exclusion, filePath)).ToList();
                 }
             }
 
-            return filePaths;
+            return loadedLines;
         }
 
         public IList<string> Process(IEnumerable<IEvent> exclusions, IList<string> filePaths)

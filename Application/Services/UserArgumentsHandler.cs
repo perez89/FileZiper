@@ -4,16 +4,14 @@ namespace Application.Services
 {
     using Application.Domain.DTOs;
     using Application.Services.Interfaces;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text.RegularExpressions;
 
     public class UserArgumentsHandler : IUserArgumentsHandler
     {
         public UserCommandsDTO Extract(string[] Args)
         {
-            var fsdfds = new UserCommandsDTO();
+            var commands = new UserCommandsDTO();
 
 
             Regex Spliter = new Regex(@"^-{1,2}|^/|=",
@@ -25,14 +23,10 @@ namespace Application.Services
             string Parameter = null;
             string[] Parts;
 
-            // Valid parameters forms:
-            // {-,/,--}param{ ,=,:}((",')value(",'))
-            // Examples: 
-            // -param1 value1 --param2 /param3:"Test-:-work" 
-            //   /param4=happy -param5 '--=nice=--'
+
             foreach (string Txt in Args)
             {
-                Console.WriteLine(Txt);
+              //  Console.WriteLine(Txt);
                 // Look for new parameters (-,/ or --) and a
                 // possible enclosed value (=,:)
                 Parts = Spliter.Split(Txt, 3);
@@ -48,10 +42,8 @@ namespace Application.Services
                             Parts[0] =
                                 Remover.Replace(Parts[0], "$1");
 
-                            fsdfds.Add(new KeyValuePair<string, string>(Parameter, Parts[0]));
-                            //Parameters.Add(Parameter, Parts[0]);
-
-                            //Parameter = null;
+                            commands.Add(new KeyValuePair<string, string>(Parameter, Parts[0]));
+                         
                         }
                         // else Error: no parameter waiting for a value (skipped)
                         break;
@@ -67,7 +59,7 @@ namespace Application.Services
                 }
             }
 
-            return fsdfds;
+            return commands;
 
 
         }
