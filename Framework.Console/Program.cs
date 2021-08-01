@@ -4,6 +4,7 @@
     using Application.Services.Interfaces;
     using Application.Utilities;
     using Framework.Console.DependencyInjection;
+    using Interface.Services.Interfaces;
     using Microsoft.Extensions.DependencyInjection;
     using System;
 
@@ -14,6 +15,7 @@
             ServiceProvider sp = Container.Build();
 
             var inputUserBuilder = sp.GetService<IInputUserBuilder>();
+            var userCommandsService = sp.GetService<IUserArgumentsHandler>();
             var exclusionService = sp.GetService<IExclusionService>();
             var outputService = sp.GetService<IOutputService>();
 
@@ -23,8 +25,9 @@
             Console.ReadLine();
 
 
-
-            var _inputUserBuilder = inputUserBuilder.CreateInputUserBuilder(args).Build();
+            //            var _outputBuilder = outputBuilder.CreateOutputBuilder(inputUserCommands).Build().Get(); ;
+            var commandsList = userCommandsService.Extract(args);
+            var _inputUserBuilder = inputUserBuilder.CreateInputUserBuilder(commandsList).Build();
 
 
             if (!_inputUserBuilder.IsValid())

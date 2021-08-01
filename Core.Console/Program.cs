@@ -4,6 +4,7 @@
     using Application.Services.Interfaces;
     using Application.Utilities;
     using Core.Console.DependencyInjection;
+    using Interface.Services.Interfaces;
     using Microsoft.Extensions.DependencyInjection;
     using System;
 
@@ -13,10 +14,11 @@
         {
             ServiceProvider sp = Container.Build();
 
+            var userCommandsService = sp.GetService<IUserArgumentsHandler>();
             var inputUserBuilder = sp.GetService<IInputUserBuilder>();
             var exclusionService = sp.GetService<IExclusionService>();
             var outputService = sp.GetService<IOutputService>();
-
+      
             Console.WriteLine("Hello to FileZiper! - .Net Core");
 
             Console.WriteLine("Write something to start the process :)");
@@ -24,8 +26,8 @@
 
 
             //            var _outputBuilder = outputBuilder.CreateOutputBuilder(inputUserCommands).Build().Get(); ;
-
-            var _inputUserBuilder = inputUserBuilder.CreateInputUserBuilder(args).Build();
+            var commandsList = userCommandsService.Extract(args);
+            var _inputUserBuilder = inputUserBuilder.CreateInputUserBuilder(commandsList).Build();
 
 
             if (!_inputUserBuilder.IsValid())

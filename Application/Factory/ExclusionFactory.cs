@@ -30,8 +30,8 @@ namespace Application.Factory
         {
             return new Exclusion
             {
-                ExclusionType = (ExclusionType)Enum.Parse(typeof(ExclusionType), outputType),
-                Exclusions = args
+                Type = (ExclusionType)Enum.Parse(typeof(ExclusionType), outputType),
+                Values = args
             };
         }
     }

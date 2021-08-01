@@ -17,7 +17,7 @@ namespace Application.Domain
             return this;
         }
 
-        public byte[] Zipsaas()
+        public byte[] Zip()
         {
             var entryNames = GetEntryNames(_folderAndSubFilesToZip, _sourcePath, true);
       

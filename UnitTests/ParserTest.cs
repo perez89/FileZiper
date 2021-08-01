@@ -24,21 +24,24 @@
 
             var outputFactory = new Mock<IOutputFactory>();
 
-            var userCommandsDTO = new UserCommandsDTO();
+            var commandsList = new List<KeyValuePair<string, string>>();
 
             var source = "c:\\perez";
             var output = "smtp";
             var destination = "lplperez@clix.pt";
 
-            userCommandsDTO.Add(new KeyValuePair<string, string>("source", source));
-            userCommandsDTO.Add(new KeyValuePair<string, string>("EFile", "benfica"));
-            userCommandsDTO.Add(new KeyValuePair<string, string>("EFile", "sporting"));
-            userCommandsDTO.Add(new KeyValuePair<string, string>("Name", "output_name"));
-            userCommandsDTO.Add(new KeyValuePair<string, string>("output", "smtp"));
-            userCommandsDTO.Add(new KeyValuePair<string, string>("destination", destination));
+            commandsList.Add(new KeyValuePair<string, string>("source", source));
+            commandsList.Add(new KeyValuePair<string, string>("EFile", "benfica"));
+            commandsList.Add(new KeyValuePair<string, string>("EFile", "sporting"));
+            commandsList.Add(new KeyValuePair<string, string>("Name", "output_name"));
+            commandsList.Add(new KeyValuePair<string, string>("output", "smtp"));
+            commandsList.Add(new KeyValuePair<string, string>("destination", destination));
+
+            var userCommandsDTO = new UserCommandsDTO(commandsList);
+
 
             var listValuesToExclude = new List<string> (){ "benfica", "sporting" };
-            exclusionFactory.Setup(item => item.CreateExclusion("EFile", listValuesToExclude)).Returns(new Exclusion {ExclusionType = ExclusionType.EFile, Exclusions = listValuesToExclude });
+            exclusionFactory.Setup(item => item.CreateExclusion("EFile", listValuesToExclude)).Returns(new Exclusion {Type = ExclusionType.EFile, Values = listValuesToExclude });
 
             outputFactory.Setup(item => item.CreateOutputDestination(output, destination)).Returns(new OutputDestinationDTO { Destination =destination, Type = OutputType.SMTP });
 
@@ -49,14 +52,15 @@
 
             var exclusions = new List<Exclusion>();
             exclusions.Add(new Exclusion {
-                ExclusionType = ExclusionType.EFile,
-                Exclusions = new List<string>(){ "benfica", "sporting" }
+                Type = ExclusionType.EFile,
+                Values = new List<string>(){ "benfica", "sporting" }
             });
 
             //Assert
-            Assert.Contains(inputParsed.Exclusions, x => exclusions.Any(y => x.ExclusionType == y.ExclusionType));
+            Assert.Contains(inputParsed.Exclusions, x => exclusions.Any(y => x.Type == y.Type));
 
             Assert.Equal(source, inputParsed.Source);
+
             exclusionFactory.Verify(s => s.CreateExclusion(It.IsAny<string>(), It.IsAny<List<string>>()), Times.AtLeastOnce);
 
             outputFactory.Verify(s => s.CreateOutputDestination(It.IsAny<string>(), It.IsAny<string>()), Times.Once);

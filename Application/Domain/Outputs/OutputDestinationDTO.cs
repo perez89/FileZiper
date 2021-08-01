@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Application.Domain.Outputs
+﻿namespace Application.Domain.Outputs
 {
     using Application.Domain.Enums;
     public class OutputDestinationDTO

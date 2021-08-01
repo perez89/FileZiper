@@ -1,7 +1,8 @@
-﻿using Application.Domain.Exclusions.Interfaces;
+﻿
 
 namespace Application.Domain.Exclusions
 {
+    using Application.Domain.Exclusions.Interfaces;
 
     public class FileExclusionStrategy : IEventExclusionStrategy
     {

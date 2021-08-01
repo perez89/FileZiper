@@ -43,19 +43,19 @@
         private string GetZipName()
         {
 
-            var source = _argsDictionary[CommandTypes.Name.ToString()].FirstOrDefault();
+            var source = _argsDictionary.Get(CommandTypes.Name.ToString()).FirstOrDefault();
             return source.Value;
         }
         private string GetSourceName() {
 
-            var source = _argsDictionary[CommandTypes.Source.ToString()].FirstOrDefault();
+            var source = _argsDictionary.Get(CommandTypes.Source.ToString()).FirstOrDefault();
             return source.Value;
         }
 
         private IList<Exclusion> GetExclusions()
         {
             var extensionsTypes = new string[] { CommandTypes.EExtension.ToString(), CommandTypes.EFile.ToString(), CommandTypes.EFolder.ToString() };
-            var exclusions = _argsDictionary[extensionsTypes];
+            var exclusions = _argsDictionary.Get(extensionsTypes);
             var result = GetExclusionType(exclusions);
 
             return result;
@@ -84,8 +84,8 @@
         private OutputDestinationDTO GetOutputDestination()
         {
 
-            var outputType = _argsDictionary[CommandTypes.Output.ToString()].FirstOrDefault();
-            var destination = _argsDictionary[CommandTypes.Destination.ToString()].FirstOrDefault();
+            var outputType = _argsDictionary.Get(CommandTypes.Output.ToString()).FirstOrDefault();
+            var destination = _argsDictionary.Get(CommandTypes.Destination.ToString()).FirstOrDefault();
 
             return GetOutputDestination(outputType, destination);
         }

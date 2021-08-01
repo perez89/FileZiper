@@ -146,6 +146,28 @@ namespace UnitTests
             Assert.False(outPutCreated.IsDestinationValid());
 
         }
-      
+
+
+        [Fact]
+        public void OutputFromArgumentFactoryTest_LocalFile_Wrong_Path()
+        {
+            //Arrange
+            //Mock<IExclusionFactory> mock = 
+            var outputFactory = new OutputFactory();
+            var outTypeEnum = OutputType.LocalFile;
+            var destination = "c:\\xpto\\zerep";
+            var fileName = "Benfica";
+
+            //Act 
+            var outPutCreated = outputFactory.CreateOutputFromArguments(outTypeEnum, destination, fileName);
+
+
+            //Assert
+            Assert.True(outPutCreated.GetType() == typeof(LocalOutput));
+
+            Assert.False(outPutCreated.IsDestinationValid());
+
+        }
+
     }
 }

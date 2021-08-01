@@ -22,24 +22,24 @@ namespace Application.Services
             var availableOutputs = ApplicationArguments.AvailableOutputOperations();
 
             //check if there are argments
-            if (args == null || !args.GetFlags().Any())
+            if (args == null || !args.GetKeys().Any())
                 return false;
 
             //mandatory Field      
-            if (args[CommandTypes.Source.ToString()] == null)
+            if (args.Get(CommandTypes.Source.ToString()) == null)
             {
                 return false;
             }
 
             //mandatory Field     
 
-            if (args[CommandTypes.Output.ToString()] == null)
+            if (args.Get(CommandTypes.Output.ToString()) == null)
             {
                 return false;
             }
 
             //validate if all exclusions flags inserted exist
-            foreach (var arg in args.GetFlags())
+            foreach (var arg in args.GetKeys())
             {
                 if (!availableExclusions.Any(x => string.Equals(x.Value, arg, System.StringComparison.InvariantCultureIgnoreCase)))
                 {

@@ -41,11 +41,23 @@ namespace Application.Factory
             }
         }
 
+
+        public OutputType GetOutputTypeEnum(string outputType)
+        {
+            OutputType outputTyped;
+
+            if (Enum.TryParse(outputType, out outputTyped))
+                return outputTyped;
+            
+            throw new ArgumentOutOfRangeException(nameof(outputType), outputType, null);            
+               
+        }
+
         public OutputDestinationDTO CreateOutputDestination(string outputType, string destination)
         {
             return new OutputDestinationDTO
             {
-                Type = (OutputType)Enum.Parse(typeof(OutputType), outputType),
+                Type = GetOutputTypeEnum(outputType),
                 Destination = destination
             };
         }
