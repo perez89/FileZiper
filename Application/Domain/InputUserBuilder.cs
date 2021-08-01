@@ -28,13 +28,12 @@ namespace Application.Domain
 
             _IsValid = _validateArgs.IsValidate(userCommandsDTO);
 
-            if (!_IsValid)
+            if (_IsValid)
             {
-
-                return this;
+                userInputDTO = _parser.Parse(userCommandsDTO);
             }
 
-            userInputDTO = _parser.Parse(userCommandsDTO);
+          
             return this;
 
         }

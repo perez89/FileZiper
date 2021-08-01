@@ -30,8 +30,7 @@
             var argumentsDTO = new UserInputDTO
             {
                 Source = GetSourceName(),
-                Name = GetZipName(),
-                
+                Name = GetZipName(),                
                 Exclusions = GetExclusions(),
 
                 OutputDestination = GetOutputDestination()

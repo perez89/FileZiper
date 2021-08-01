@@ -102,10 +102,8 @@ namespace UnitTests
             Assert.True(outPutCreated.GetType() == typeof(FileShareOutput));
 
             Assert.True(outPutCreated.IsDestinationValid());
-
-
-
         }
+
 
         [Fact]
         public void OutputFromArgumentFactoryTest_SMTP()
