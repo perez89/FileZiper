@@ -1,8 +1,5 @@
 ﻿namespace Application.Domain.Outputs
 {
-    using System.IO;
-    using System.Text.RegularExpressions;
-
     public class SmtpOutput : IOutput
     {
         public string Destination { get; set; }

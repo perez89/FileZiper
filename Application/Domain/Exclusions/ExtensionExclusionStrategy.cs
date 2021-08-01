@@ -1,7 +1,8 @@
-﻿using Application.Domain.Exclusions.Interfaces;
+﻿
 
 namespace Application.Domain.Exclusions
 {
+    using Application.Domain.Exclusions.Interfaces;
     internal class ExtensionExclusionStrategy : IEventExclusionStrategy
     {
         public bool CanHandle(IEvent  output)
@@ -11,8 +12,6 @@ namespace Application.Domain.Exclusions
 
         public bool Exclude(IEvent output, string filePath)
         {
-            //  Guard.Argument( event, nameof( event)).Cast<LocalOutput>();
-
             var outputA = (ExtensionExclusion) output;
             return  outputA.Exclude(filePath);
         }

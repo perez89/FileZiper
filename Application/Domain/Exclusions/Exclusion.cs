@@ -8,7 +8,7 @@ namespace Application.Domain.Exclusions
 
     public class Exclusion : IExclusion
     {    
-        public ExclusionType ExclusionType { get; set; }
-        public List<string> Exclusions { get; set; }
+        public ExclusionType Type { get; set; }
+        public List<string> Values { get; set; }
     }
 }

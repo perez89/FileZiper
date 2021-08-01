@@ -11,7 +11,6 @@
     using Microsoft.Extensions.DependencyInjection;
     using System.Linq;
     using System.Reflection;
-    using static Application.Services.UserCommandToInputParser;
 
     public static class Container
     {
@@ -31,25 +30,22 @@
                 .AddSingleton<IExclusionController, ExclusionController>()
 
                 //Strategies
-
                 .AddSingleton<IEventExclusionStrategy, FolderExclusionStrategy>()
                 .AddSingleton<IEventExclusionStrategy, ExtensionExclusionStrategy>()
                 .AddSingleton<IEventExclusionStrategy, FileExclusionStrategy>()
 
-
-                //df
-                .AddSingleton<IUserArgumentsHandler, UserArgumentsHandler>()
                 .AddSingleton<IUserCommandToInputParser, UserCommandToInputParser>()
                 .AddSingleton<IArgumentsValidation, ArgumentsValidation>()
 
 
                 .AddSingleton<IZipper, Zipper>()
-
-                .AddSingleton<IInputUserBuilder, InputUserBuilder>()
+              
                 .AddSingleton<IExclusionService, ExclusionService>()
                 .AddSingleton<IOutputService, OutputService>()
                 .AddSingleton<IReadFilesService, ReadFilesService>()
+
                 .AddSingleton<IExclusionFactory, ExclusionFactory>()
+                .AddSingleton<IInputUserBuilder, InputUserBuilder>()
                 .AddSingleton<IOutputFactory, OutputFactory>();
 
 

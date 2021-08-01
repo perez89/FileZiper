@@ -3,6 +3,7 @@
 namespace Framework.Console.DependencyInjection
 {
     using Application.DependencyInjection;
+    using Interface.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection;
     public static class Container
     {
@@ -10,7 +11,9 @@ namespace Framework.Console.DependencyInjection
         {
             var collection = new ServiceCollection();
             collection.SetupApplication();
-            collection.SetupFrameworkConsole();
+            collection.SetupFrameworkConsole();         
+            collection.SetupInterface();
+
             var serviceProvider = collection.BuildServiceProvider();
             return serviceProvider;
         }

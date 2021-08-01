@@ -20,7 +20,7 @@ namespace Application.Services
         }
         public void RemoveExclusionsFromInput(UserInputDTO inputUserCommands)
         {
-            var exclusions = inputUserCommands.Exclusions.ToList().ConvertAll(x => _exclusionFactory.CreateExclusion(x.ExclusionType, x.Exclusions));
+            var exclusions = inputUserCommands.Exclusions.ToList().ConvertAll(x => _exclusionFactory.CreateExclusion(x.Type, x.Values));
 
 
             var folderAndSubFiles = _readFilesService.GetFiles(inputUserCommands.Source);
@@ -41,7 +41,7 @@ namespace Application.Services
             foreach (var exclusion in inputUserCommands.Exclusions)
             {
 
-                Console.WriteLine("Type= " + exclusion.ExclusionType + " | Values: " + String.Join(", ", exclusion.Exclusions));
+                Console.WriteLine("Type= " + exclusion.Type + " | Values: " + String.Join(", ", exclusion.Values));
 
             }
 

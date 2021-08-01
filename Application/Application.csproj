@@ -15,8 +15,11 @@
 
   <ItemGroup>
     <Compile Remove="Domain\DTOs\UserCommand.cs" />
+    <Compile Remove="Domain\Outputs\OutputParametersDTO.cs" />
     <Compile Remove="Domain\Zip\IZipperGod.cs" />
     <Compile Remove="Domain\Zip\ZipFile.cs" />
+    <Compile Remove="Services\Interfaces\IUserArgumentsHandler.cs" />
+    <Compile Remove="Services\UserArgumentsHandler.cs" />
   </ItemGroup>
 
   <ItemGroup>

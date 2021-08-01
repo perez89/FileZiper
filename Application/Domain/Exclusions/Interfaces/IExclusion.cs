@@ -5,8 +5,8 @@ namespace Application.Domain.Exclusions.Interfaces
     using System.Collections.Generic;
     public interface IExclusion
     {
-        ExclusionType ExclusionType { get; set; }
+        ExclusionType Type { get; set; }
 
-        List<string> Exclusions { get; set; }
+        List<string> Values { get; set; }
     }
 }

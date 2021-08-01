@@ -6,7 +6,6 @@ namespace UnitTests
     using Application.Domain.Enums;
     using Application.Domain.Exclusions;
     using Application.Domain.Exclusions.Interfaces;
-    using Application.Factory;
     using Application.Factory.Interfaces;
     using Application.Services;
     using Application.Services.Interfaces;
@@ -14,7 +13,7 @@ namespace UnitTests
     using System.Collections.Generic;
     using System.Linq;
     using Xunit;
-    public class UnitExlusions
+    public class ExlusionsTest
     {
 
         [Fact]
@@ -29,8 +28,8 @@ namespace UnitTests
             ExclusionType exclusionType = ExclusionType.EExtension;
 
             var exclusion = new Exclusion {
-                ExclusionType = exclusionType,
-                Exclusions = exclusionsValues
+                Type = exclusionType,
+                Values = exclusionsValues
             };
 
 
@@ -69,9 +68,7 @@ namespace UnitTests
 
             Assert.NotNull(inputUserCommands.folderAndSubFilesToZip);
 
-            Assert.True(inputUserCommands.folderAndSubFilesToZip.Length>0);
-
-  
+            Assert.True(inputUserCommands.folderAndSubFilesToZip.Length>0);  
 
         }
     }

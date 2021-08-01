@@ -12,7 +12,7 @@ namespace Application.Domain.Outputs
 
         public override string ExecuteOutput()
         {
-            return this.Output.Execute(Zipper.Zipsaas());
+            return this.Output.Execute(Zipper.Zip());
         }
     }
 }

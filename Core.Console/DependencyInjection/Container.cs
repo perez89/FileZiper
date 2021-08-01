@@ -3,6 +3,7 @@
 namespace Core.Console.DependencyInjection
 {
     using Application.DependencyInjection;
+    using Interface.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection;
     public static class Container
     {
@@ -10,6 +11,7 @@ namespace Core.Console.DependencyInjection
         {
             var collection = new ServiceCollection();
             collection.SetupApplication();
+            collection.SetupInterface();
             collection.SetupCoreConsole();
             var serviceProvider = collection.BuildServiceProvider();
             return serviceProvider;

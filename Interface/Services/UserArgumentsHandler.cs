@@ -1,17 +1,16 @@
 ﻿
 
-namespace Application.Services
+namespace Interface.Services
 {
-    using Application.Domain.DTOs;
-    using Application.Services.Interfaces;
+    using Interface.Services.Interfaces;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
 
     public class UserArgumentsHandler : IUserArgumentsHandler
     {
-        public UserCommandsDTO Extract(string[] Args)
+        public List<KeyValuePair<string, string>> Extract(string[] Args)
         {
-            var commands = new UserCommandsDTO();
+            var Parameters = new List<KeyValuePair<string, string>>();
 
 
             Regex Spliter = new Regex(@"^-{1,2}|^/|=",
@@ -25,17 +24,13 @@ namespace Application.Services
 
 
             foreach (string Txt in Args)
-            {
-               
-              //  Console.WriteLine(Txt);
-                // Look for new parameters (-,/ or --) and a
-                // possible enclosed value (=,:)
+            {                             
+                // Look for new parameters (-,/ or --) 
                 Parts = Spliter.Split(Txt.ToLower(), 3);
 
                 switch (Parts.Length)
                 {
-                    // Found a value (for the last parameter 
-                    // found (space separator))
+          
                     case 1:
                         if (Parameter != null)
                         {
@@ -43,16 +38,12 @@ namespace Application.Services
                             Parts[0] =
                                 Remover.Replace(Parts[0], "$1");
 
-                            commands.Add(new KeyValuePair<string, string>(Parameter, Parts[0]));
+                            Parameters.Add(new KeyValuePair<string, string>(Parameter, Parts[0]));
                          
                         }
-                        // else Error: no parameter waiting for a value (skipped)
                         break;
 
-                    // Found just a parameter
                     case 2:
-
-
                         Parameter = Parts[1];
                         break;
 
@@ -60,7 +51,7 @@ namespace Application.Services
                 }
             }
 
-            return commands;
+            return Parameters;
 
 
         }
