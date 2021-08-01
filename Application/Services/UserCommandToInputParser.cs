@@ -45,12 +45,12 @@
         {
 
             var source = _argsDictionary[CommandTypes.Name.ToString()].FirstOrDefault();
-            return source?.Argument;
+            return source.Value;
         }
         private string GetSourceName() {
 
             var source = _argsDictionary[CommandTypes.Source.ToString()].FirstOrDefault();
-            return source?.Argument;
+            return source.Value;
         }
 
         private IList<Exclusion> GetExclusions()
@@ -62,7 +62,7 @@
             return result;
         }
 
-        public IList<Exclusion> GetExclusionType(IEnumerable<UserCommand> exclusions)
+        public IList<Exclusion> GetExclusionType(IEnumerable<KeyValuePair<string, string>> exclusions)
         {
             var availableExclusions = ApplicationArguments.AvailableExtensions();
 
@@ -71,10 +71,10 @@
 
             foreach (var availableExclusion in availableExclusions)
             {
-                var _exclusions = exclusions.Where(x => x.Option.Equals(availableExclusion.Value));
+                var _exclusions = exclusions.Where(x => x.Key.Equals(availableExclusion.Value));
                 if (_exclusions.Any())
                 {
-                    var patternToRemove = _exclusions.Select(x => x.Argument).ToList();
+                    var patternToRemove = _exclusions.Select(x => x.Value).ToList();
                     result.Add(_exclusionFactory.CreateExclusion(availableExclusion.Value, patternToRemove));
                 }
             }
@@ -91,11 +91,11 @@
             return GetOutputDestination(outputType, destination);
         }
 
-        private OutputDestinationDTO GetOutputDestination(UserCommand outputType, UserCommand destination)
+        private OutputDestinationDTO GetOutputDestination(KeyValuePair<string, string> outputType, KeyValuePair<string, string> destination)
         {
-            var availableOutput = ApplicationArguments.AvailableOutputOperations().FirstOrDefault(x=> string.Equals(x.Value, outputType.Argument, StringComparison.OrdinalIgnoreCase) ).Value;
+            var availableOutput = ApplicationArguments.AvailableOutputOperations().FirstOrDefault(x=> string.Equals(x.Value, outputType.Value, StringComparison.OrdinalIgnoreCase) ).Value;
 
-            return _outputFactory.CreateOutputDestination(availableOutput, destination.Argument);        
+            return _outputFactory.CreateOutputDestination(availableOutput, destination.Value);        
         }
 
     }

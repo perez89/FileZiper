@@ -24,7 +24,6 @@
 
             var outputFactory = new Mock<IOutputFactory>();
 
-
             var userCommandsDTO = new UserCommandsDTO();
 
             var source = "c:\\perez";

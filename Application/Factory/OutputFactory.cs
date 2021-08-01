@@ -41,11 +41,11 @@ namespace Application.Factory
             }
         }
 
-        public OutputDestinationDTO CreateOutputDestination(string type, string destination)
+        public OutputDestinationDTO CreateOutputDestination(string outputType, string destination)
         {
             return new OutputDestinationDTO
             {
-                Type = (OutputType)Enum.Parse(typeof(OutputType), type),
+                Type = (OutputType)Enum.Parse(typeof(OutputType), outputType),
                 Destination = destination
             };
         }
