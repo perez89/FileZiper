@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Domain\DTOs\UserCommand.cs" />
     <Compile Remove="Domain\Zip\IZipperGod.cs" />
     <Compile Remove="Domain\Zip\ZipFile.cs" />
   </ItemGroup>

@@ -10,6 +10,6 @@ namespace Application.Factory.Interfaces
         IOutput CreateOutputFromArguments(OutputType type, string destination, string fileName);
         IOutput GetOutputTypeToTestDestination(string outputType, string destination);
 
-        OutputDestinationDTO CreateOutputDestination(string type, string destination);
+        OutputDestinationDTO CreateOutputDestination(string outputType, string destination);
     }
 }

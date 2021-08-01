@@ -37,7 +37,7 @@ namespace Application.Domain
         {
             CreateZip();
             CreateOutput();
-            this.Output_Bridge=new OutputBridge(_zipper, _output);
+            this.Output_Bridge = new OutputBridge(_zipper, _output);
   
             return this;
         }

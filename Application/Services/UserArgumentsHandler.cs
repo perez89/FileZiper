@@ -26,10 +26,11 @@ namespace Application.Services
 
             foreach (string Txt in Args)
             {
+               
               //  Console.WriteLine(Txt);
                 // Look for new parameters (-,/ or --) and a
                 // possible enclosed value (=,:)
-                Parts = Spliter.Split(Txt, 3);
+                Parts = Spliter.Split(Txt.ToLower(), 3);
 
                 switch (Parts.Length)
                 {
